@@ -10,7 +10,7 @@ const LeftSidebar = ({ categories, activeId }) => {
           return (
             <li
               key={category.category_id}
-              className={` ${activeId === category.category_id && "bg-slate-200"}
+              className={` ${activeId === category.category_id && "bg-purple-500 text-white"}
                     rounded-md text-md text-center font-bold`}
             >
               <Link href={`/category/${category.category_id}`} className="block p-2 ">
