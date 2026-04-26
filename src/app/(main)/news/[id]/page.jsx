@@ -7,6 +7,16 @@ import { CiBookmark, CiShare2 } from "react-icons/ci";
 import { FaEye } from "react-icons/fa";
 import { IoIosStar } from "react-icons/io";
 
+export const generateMetadata = async ({ params }) => {
+  const { id } = await params;
+  const news = await getNewsDetailsById(id);
+
+  return {
+    title: `${news.title}`,
+    description: news.details || "Get the latest news details from Dragon News, your trusted source for accurate and timely information.",
+  };
+};
+
 const NewsDetailsPage = async ({ params }) => {
     const { id } = await params;
   const news = await getNewsDetailsById(id);
