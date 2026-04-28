@@ -2,8 +2,9 @@
 
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const RegisterPage = () => {
   const {
@@ -11,6 +12,8 @@ const RegisterPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const [isShowPassword, setIsShowPassword] = useState(false);
 
   const handleRegisterFunc = async (data) => {
     console.log(data, "register data");
@@ -72,14 +75,21 @@ const RegisterPage = () => {
             {errors.photoUrl && <p className="text-red-500">Photo URL is required</p>}
           </fieldset>
 
-          <fieldset className="fieldset">
+          <fieldset className="fieldset relative">
             <legend className="fieldset-legend">Password</legend>
             <input
-              type="password"
+              type={isShowPassword ? "text" : "password"}
               className="input w-full"
               {...register("password", { required: true })}
               placeholder="Type your password"
             />
+            <span
+              className="absolute right-3 top-4 cursor-pointer text-lg"
+              onClick={() => setIsShowPassword(!isShowPassword)}
+            >
+              {isShowPassword ? <FaEye /> : <FaEyeSlash />}
+            </span>
+
             {errors.password && <p className="text-red-500">Password is required</p>}
           </fieldset>
           <button className="btn w-full bg-slate-700 text-white">Register</button>
